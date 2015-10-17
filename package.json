@@ -1,5 +1,5 @@
 {
-  "name": "epamlan",
+  "name": "netbakery",
   "private": true,
   "devDependencies": {
     "grunt": "^0.4.5",
