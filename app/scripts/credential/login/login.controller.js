@@ -9,10 +9,10 @@
     .module('app')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['authenticator', '$log'];
+  LoginController.$inject = ['authenticator', '$log', '$state'];
 
   /* @ngInject */
-  function LoginController(authenticator, $log) {
+  function LoginController(authenticator, $log, $state) {
     var vm = this;
     vm.login;
     vm.loginForm;
@@ -28,7 +28,9 @@
 
     function login(){
       $log.debug("Logging in with " + vm.loginForm.email);
-      authenticator.authenticate(vm.loginForm);
+      authenticator.authenticate(vm.loginForm).then(function(){
+        $state.go('home');
+      });
     }
 
 

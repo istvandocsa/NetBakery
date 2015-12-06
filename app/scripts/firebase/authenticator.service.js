@@ -14,9 +14,12 @@
   function authenticator($rootScope, $firebaseAuth, firebaseService, $log) {
     var firebaseAuth = $firebaseAuth(firebaseService.getReference());
 
+    var currentUser;
+
     var service = {
       authenticate: authenticate,
-      createUser: createUser
+      createUser: createUser,
+      currentUser: getCurrentUser
     };
     return service;
 
@@ -28,11 +31,16 @@
         password: credential.password
       }).then(function(authData){
         $log.info("Successfully logged in as " + authData.uid);
-        $rootScope.$emit('credential.login.success', authData);
+        currentUser = {uid: authData.uid, email: credential.email};
+        $rootScope.$emit('credential.login.success', currentUser);
       }).catch(function(error){
         $log.info("Failed to log in!");
         $rootScope.$emit('credential.login.error', error);
       });
+    }
+
+    function getCurrentUser(){
+      return currentUser;
     }
 
     function createUser(credentials){
