@@ -23,7 +23,7 @@
     ////////////////
 
     function authenticate(credential){
-      firebaseAuth.$authWithPassword({
+      return firebaseAuth.$authWithPassword({
         email: credential.email,
         password: credential.password
       }).then(function(authData){
