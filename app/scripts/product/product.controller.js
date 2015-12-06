@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductController', ProductController);
 
-  ProductController.$inject = ['$rootScope'];
+  ProductController.$inject = ['cartService'];
 
   /* @ngInject */
-  function ProductController($rootScope) {
+  function ProductController(cartService) {
     var vm = this;
 
     activate();
@@ -23,8 +23,9 @@
       vm.clickOnAdd = clickOnAdd;
     }
 
-    function clickOnAdd(){
-      $rootScope.$emit('product.to.cart', {name: vm.object.name, amount: vm.amountToAdd});
+    function clickOnAdd() {
+      var order = {name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd};
+      cartService.addToCart(order);
       vm.amountToAdd = 0;
     }
 
