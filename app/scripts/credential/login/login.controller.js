@@ -14,17 +14,21 @@
   /* @ngInject */
   function LoginController(authenticator, $log) {
     var vm = this;
-    vm.login = login;
+    vm.login;
+    vm.loginForm;
 
     activate();
 
     ////////////////
 
     function activate() {
+      vm.login = login;
+      vm.loginForm = {};
     }
 
     function login(){
-      $log.info("login called.");
+      $log.debug("Logging in with " + vm.loginForm.email);
+      authenticator.authenticate(vm.loginForm);
     }
 
 
