@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductController', ProductController);
 
-  ProductController.$inject = ['$rootScope'];
+  ProductController.$inject = ['$rootScope', 'modalService', '$scope'];
 
   /* @ngInject */
-  function ProductController($rootScope) {
+  function ProductController($rootScope, modalService, $scope) {
     var vm = this;
 
     activate();
@@ -20,11 +20,15 @@
 
     function activate() {
       vm.amountToAdd = 0;
+      vm.t = function () {
+        modalService.showModal($scope);
+      }
       vm.clickOnAdd = clickOnAdd;
     }
 
-    function clickOnAdd(){
+    function clickOnAdd() {
       $rootScope.$emit('product.to.cart', {name: vm.object.name, amount: vm.amountToAdd});
+      vm.amountToAdd = 0;
     }
 
   }
