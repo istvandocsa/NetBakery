@@ -1,0 +1,31 @@
+/**
+ * Created by wermerbalazs on 06/12/15.
+ */
+(function () {
+  'use strict';
+
+  angular
+    .module('app')
+    .directive('productDirective', productDirective);
+
+  productDirective.$inject = [];
+
+  /* @ngInject */
+  function productDirective() {
+    var directive = {
+      bindToController: true,
+      templateUrl: 'scripts/product/product.template.html',
+      controller: 'ProductController',
+      controllerAs: 'vm',
+      link: link,
+      restrict: 'E',
+      scope: {}
+    };
+    return directive;
+
+    function link(scope, element, attrs) {
+
+    }
+  }
+})();
+
