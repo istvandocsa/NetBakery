@@ -12,6 +12,8 @@
 
   /* @ngInject */
   function authenticator($rootScope, $firebaseAuth, firebaseService, $log) {
+    var firebaseAuth = $firebaseAuth(firebaseService.getReference());
+
     var service = {
       authenticate: authenticate,
       createUser: createUser
@@ -19,8 +21,6 @@
     return service;
 
     ////////////////
-
-    var firebaseAuth = $firebaseAuth(firebaseService.getReference());
 
     function authenticate(credential){
       firebaseAuth.$authWithPassword({

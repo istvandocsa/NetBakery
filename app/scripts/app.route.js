@@ -33,7 +33,9 @@ angular
           {
             name: 'login',
             url: '/login',
-            templateUrl: 'scripts/credential/login/credential.login.template.html'
+            templateUrl: 'scripts/credential/login/credential.login.template.html',
+            controller: 'LoginController',
+            controllerAs: 'vm'
           }
         ]
       });
