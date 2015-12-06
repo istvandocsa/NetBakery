@@ -1,5 +1,7 @@
-<ul>
-  <li ng-repeat="product in vm.products">
-    {{product.name}}
-  </li>
-</ul>
+<div class="thumbnail">
+  <img src="{{vm.object.url}}" alt={{vm.object.name}}">
+  <div class="caption">
+    <h4>{{vm.object.name}}</h4>
+    <div class="text-right">Ár: {{vm.object.price}} Ft</div>
+  </div>
+</div>

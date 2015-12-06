@@ -19,7 +19,7 @@
     ////////////////
 
     function activate() {
-      code
+      console.log(vm.object);
     }
   }
 

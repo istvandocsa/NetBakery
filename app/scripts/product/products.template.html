@@ -1,13 +1,7 @@
 <div id="products">
   <div class="row">
     <div ng-repeat="product in vm.products" class="col-md-4">
-      <div class="thumbnail">
-        <img src="{{product.url}}" alt={{product.name}}">
-        <div class="caption">
-          <h4>{{product.name}}</h4>
-          <div class="text-right">Ár: {{product.price}} Ft</div>
-        </div>
-      </div>
+      <product object="product"></product>
     </div>
   </div>
 </div>
