@@ -90,4 +90,8 @@ body {
   .dw-loading-text {
     visibility: hidden;
   }
+
+  .thumbnail img {
+    height:150px;
+  }
 }
