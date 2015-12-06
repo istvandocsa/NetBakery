@@ -3,8 +3,25 @@
     <a class="navbar-brand" ui-sref="home">{{vm.brand}}</a>
   </div>
   <ul class="nav navbar-nav">
+
     <li ng-repeat="item in vm.menuItems" ui-sref-active="active">
-      <a ui-sref="{{item.state}}">{{item.name}}</a>
+
+      <a ng-if="item.simpleType" ui-sref="{{item.state}}">{{item.name}}</a>
+
+      <ul ng-if="item.simpleType === false" class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{item.name}}
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="state in item.subStates" >
+              <a ui-sref="{{state.state}}">{{state.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
     </li>
+
   </ul>
 </nav>

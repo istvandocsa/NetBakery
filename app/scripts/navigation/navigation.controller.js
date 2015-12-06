@@ -29,12 +29,23 @@
     function activate() {
       vm.menuItems = [
         {
-          name: 'Home',
-          state: 'home'
+          name: 'Kezdőoldal',
+          state: 'home',
+          simpleType: true
         },
         {
-          name: 'Login',
-          state: 'credential'
+          name: 'Belépés',
+          state: 'credential',
+          simpleType: true
+        },
+        {
+          name: 'Kimutatás készítése',
+          simpleType: false,
+          subStates: [
+            {state : 'popular' , name : 'Népszerű termékek'},
+            {state : 'neverUser', name : 'Sohasem használt termékek'},
+            {state : 'ingredientsOrders' , name : 'Alapanyag rendelés'}
+          ]
         }
       ];
     }
