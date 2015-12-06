@@ -41,10 +41,10 @@
         {
           name: 'Kimutatás készítése',
           simpleType: false,
-          states: [
-            {url : 'popular' , name : 'Népszerű termékek'},
-            {url : 'neverUser', name : 'Sohasem használt termékek'},
-            {url : 'ingredientsOrders' , name : 'Alapanyag rendelés'}
+          subStates: [
+            {state : 'popular' , name : 'Népszerű termékek'},
+            {state : 'neverUser', name : 'Sohasem használt termékek'},
+            {state : 'ingredientsOrders' , name : 'Alapanyag rendelés'}
           ]
         }
       ];
