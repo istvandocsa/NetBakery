@@ -25,6 +25,7 @@
 
     function clickOnAdd(){
       $rootScope.$emit('product.to.cart', {name: vm.object.name, amount: vm.amountToAdd});
+      vm.amountToAdd = 0;
     }
 
   }
