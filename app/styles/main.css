@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  background: url("/images/NetBakery.png") no-repeat fixed bottom;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
