@@ -1,5 +1,15 @@
-<ul>
-  <li ng-repeat="product in vm.products">
-    {{product.name}}
-  </li>
-</ul>
+<div class="thumbnail" ng-mouseenter="vm.hover=true" ng-mouseleave="vm.hover=false">
+  <img src="{{vm.object.url}}" alt={{vm.object.name}}">
+  <div class="caption">
+    <h4>{{vm.object.name}}</h4>
+    <div class="text-right">Ár: {{vm.object.price}} Ft</div>
+    <div class="row" id="shop-controller" ng-show="vm.hover">
+      <div class="col-md-6">
+       <input ng-model="vm.amountToAdd" type="text" class="form-control">
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-default" ng-click="vm.clickOnAdd()"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+</div>

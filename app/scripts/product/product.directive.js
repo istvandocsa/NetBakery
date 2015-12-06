@@ -19,7 +19,9 @@
       controllerAs: 'vm',
       link: link,
       restrict: 'E',
-      scope: {}
+      scope: {
+        object : "="
+      }
     };
     return directive;
 
