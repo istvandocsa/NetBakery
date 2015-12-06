@@ -6,7 +6,7 @@
 
   angular
     .module('app')
-    .directive('productDirective', productDirective);
+    .directive('product', productDirective);
 
   productDirective.$inject = [];
 
