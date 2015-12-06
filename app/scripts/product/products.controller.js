@@ -6,12 +6,12 @@
 
   angular
     .module('app')
-    .controller('ProductController', ProductController);
+    .controller('ProductsController', ProductsController);
 
-  ProductController.$inject = ['dependency'];
+  ProductsController.$inject = ['productsService', '$log'];
 
   /* @ngInject */
-  function ProductController(dependency) {
+  function ProductsController(productsService, $log) {
     var vm = this;
 
     activate();
@@ -19,7 +19,8 @@
     ////////////////
 
     function activate() {
-
+      vm.products = productsService.getProducts();
+      $log.debug(vm.products);
     }
   }
 

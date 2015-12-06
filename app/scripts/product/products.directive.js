@@ -11,6 +11,7 @@
   function products() {
     var directive = {
       bindToController: true,
+      templateUrl: 'scripts/product/products.template.html',
       controller: 'ProductsController',
       controllerAs: 'vm',
       link: link,
