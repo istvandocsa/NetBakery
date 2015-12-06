@@ -8,16 +8,13 @@
     .module('app')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['$log', 'authenticator', 'firebaseService', 'loadOverlay', '$rootScope'];
+  RegisterController.$inject = ['$log', 'authenticator', 'loadOverlay', '$rootScope',  '$state'];
 
   /* @ngInject */
-  function RegisterController($log, authenticator, firebaseService, loadOverlay, $rootScope) {
+  function RegisterController($log, authenticator, loadOverlay, $rootScope, $state) {
     var vm = this;
-    vm.title = 'RegisterController';
     vm.registerForm;
     vm.register = register;
-
-    var users = firebaseService.getArray('users');
 
     activate();
 
@@ -38,12 +35,15 @@
       });
     }
 
-    function handleRegisterSuccess(authData){
+    function handleRegisterSuccess(){
       $log.info("Register success!!");
-      loadOverlay.off();
+      authenticator.authenticate({email: vm.registerForm.email, password: vm.registerForm.password}).then(function(){
+        loadOverlay.off();
+        $state.go('home');
+      });
     }
 
-    function handleRegisterFail(error){
+    function handleRegisterFail(){
       $log.info("Register fail!!");
       loadOverlay.off();
     }
