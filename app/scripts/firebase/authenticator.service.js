@@ -12,6 +12,8 @@
 
   /* @ngInject */
   function authenticator($rootScope, $firebaseAuth, firebaseService, $log) {
+    var firebaseAuth = $firebaseAuth(firebaseService.getReference());
+
     var service = {
       authenticate: authenticate,
       createUser: createUser
@@ -19,8 +21,6 @@
     return service;
 
     ////////////////
-
-    var firebaseAuth = $firebaseAuth(firebaseService.getReference());
 
     function authenticate(credential){
       firebaseAuth.$authWithPassword({
@@ -30,7 +30,7 @@
         $log.info("Successfully logged in as " + authData.uid);
         $rootScope.$emit('credential.login.success', authData);
       }).catch(function(error){
-        log.info("Failed to log in! ");
+        $log.info("Failed to log in!");
         $rootScope.$emit('credential.login.error', error);
       });
     }
