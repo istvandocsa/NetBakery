@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductsController', ProductsController);
 
-  ProductsController.$inject = ['productsService', '$log', '$rootScope'];
+  ProductsController.$inject = ['productsService'];
 
   /* @ngInject */
-  function ProductsController(productsService, $log, $rootScope) {
+  function ProductsController(productsService) {
     var vm = this;
 
     activate();
@@ -20,12 +20,6 @@
 
     function activate() {
       vm.products = productsService.getProducts();
-      vm.cart = [];
-      $rootScope.$on('product.to.cart', addToCart);
-    }
-
-    function addToCart(obj) {
-      vm.cart.push(obj);
     }
   }
 
