@@ -18,5 +18,6 @@ angular
     'ngSanitize',
     'ngTouch',
     'angularSpinner',
-    'firebase'
+    'firebase',
+    'mgcrea.ngStrap'
   ]);
