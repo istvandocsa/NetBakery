@@ -24,9 +24,11 @@
     }
 
     function clickOnAdd() {
-      var order = {name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd};
-      cartService.addToCart(order);
-      vm.amountToAdd = 0;
+      if (vm.amountToAdd > 0) {
+        var order = {name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd};
+        cartService.addToCart(order);
+        vm.amountToAdd = 0;
+      }
     }
 
   }
