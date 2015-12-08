@@ -49,7 +49,7 @@
         }
       ];
       vm.cartSize = cartSize();
-      $rootScope.$on('product.addToCart', cartSize);
+      $rootScope.$on('cart.add', cartSize);
     }
 
     function getActiveState() {
