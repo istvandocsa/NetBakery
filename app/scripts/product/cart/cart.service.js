@@ -39,7 +39,6 @@
         cart.push(obj);
         $log.info('Added product: ', obj);
       }
-      console.log(cart);
     }
 
     function addOne(obj) {
