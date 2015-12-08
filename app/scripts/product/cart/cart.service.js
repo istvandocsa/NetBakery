@@ -8,10 +8,10 @@
     .module('app')
     .factory('cartService', cartService);
 
-  cartService.$inject = ['$log'];
+  cartService.$inject = ['$log', '$rootScope'];
 
   /* @ngInject */
-  function cartService($log) {
+  function cartService($log, $rootScope) {
     var cart = [];
     var service = {
       add: add,
@@ -37,6 +37,7 @@
 
       if (!contains) {
         cart.push(obj);
+        $rootScope.$emit('cart.add');
         $log.info('Added product: ', obj);
       }
     }
