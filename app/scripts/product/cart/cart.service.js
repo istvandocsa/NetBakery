@@ -8,10 +8,10 @@
     .module('app')
     .factory('cartService', cartService);
 
-  cartService.$inject = ['$log', '$rootScope'];
+  cartService.$inject = ['$log', '$filter'];
 
   /* @ngInject */
-  function cartService($log, $rootScope) {
+  function cartService($log, $filter) {
     var cart = [];
     var service = {
       add: add,
@@ -26,39 +26,27 @@
     ////////////////
 
     function add(obj) {
-      var contains = false;
-      $.each(cart, function () {
-        if ($(this)[0].name == obj.name) {
-          $log.info('Cart already contains the product. Adding amount.');
-          $(this)[0].amount += obj.amount;
-          contains = true;
-        }
-      });
+      var product = $filter('filter')(cart, obj.name);
 
-      if (!contains) {
+      if (product.length == 0) {
         cart.push(obj);
-        $rootScope.$emit('cart.add');
         $log.info('Added product: ', obj);
+      } else {
+        product[0].amount += obj.amount;
+        $log.info('Already in cart. New amount: ', product[0].amount);
       }
     }
 
     function addOne(obj) {
-      $.each(cart, function () {
-        if (obj.name == $(this)[0].name) {
-          $(this)[0].amount++;
-          $log.info('Increased product amount by one. Product:', $(this)[0]);
-        }
-      });
-
+      var product = $filter('filter')(cart, obj.name)[0];
+      product.amount++;
+      $log.info('Increased product amount by one. Product:', product);
     }
 
     function removeOne(obj) {
-      $.each(cart, function () {
-        if (obj.name == $(this)[0].name) {
-          $(this)[0].amount--;
-          $log.info('Decreased product amount by one. Product:', $(this)[0]);
-        }
-      });
+      var product = $filter('filter')(cart, obj.name)[0];
+      product.amount--;
+      $log.info('Decreased product amount by one. Product:', product);
     }
 
     function remove(obj) {
