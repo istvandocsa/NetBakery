@@ -15,6 +15,8 @@
     var cart = [];
     var service = {
       addToCart: addToCart,
+      removeFromCart: removeFromCart,
+      clearCart: clearCart,
       getCart: getCart
     };
     return service;
@@ -26,7 +28,17 @@
       $log.debug(cart);
     }
 
-    function getCart(){
+    function removeFromCart(obj) {
+      cart = $.grep(cart, function (value) {
+        return value != obj;
+      });
+    }
+
+    function clearCart(){
+      cart = [];
+    }
+
+    function getCart() {
       return cart;
     }
   }
