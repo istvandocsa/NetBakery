@@ -8,10 +8,10 @@
     .module('app')
     .factory('cartService', cartService);
 
-  cartService.$inject = ['$log', '$filter'];
+  cartService.$inject = ['$log', '$filter', '$rootScope'];
 
   /* @ngInject */
-  function cartService($log, $filter) {
+  function cartService($log, $filter, $rootScope) {
     var cart = [];
     var service = {
       add: add,
@@ -31,6 +31,7 @@
       if (product.length == 0) {
         cart.push(obj);
         $log.info('Added product: ', obj);
+        $rootScope.$emit('cart.add', cart.length);
       } else {
         product[0].amount += obj.amount;
         $log.info('Already in cart. New amount: ', product[0].amount);
