@@ -8,10 +8,10 @@
     .module('app')
     .controller('CartStatusController', CartStatusController);
 
-  CartStatusController.$inject = ['$rootScope'];
+  CartStatusController.$inject = ['modalService', '$rootScope'];
 
   /* @ngInject */
-  function CartStatusController($rootScope) {
+  function CartStatusController(modalService, $rootScope) {
     var vm = this;
 
     activate();
@@ -21,10 +21,15 @@
     function activate() {
       $rootScope.$on('cart.add',  cartSize);
       vm.cartSize = 0;
+      vm.showCartModal = showCartModal;
     }
 
     function cartSize(event, data){
       vm.cartSize=data;
+    }
+
+    function showCartModal(){
+      modalService.show("scripts/product/cart/modal/cart-modal.template.html", "CartModalController");
     }
   }
 
