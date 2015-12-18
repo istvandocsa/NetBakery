@@ -8,10 +8,10 @@
     .module('app')
     .controller('CartModalController', CartModalController);
 
-  CartModalController.$inject = ['$uibModalInstance'];
+  CartModalController.$inject = ['$uibModalInstance', 'cartService'];
 
   /* @ngInject */
-  function CartModalController($uibModalInstance) {
+  function CartModalController($uibModalInstance, cartService) {
     var vm = this;
 
     activate();
@@ -19,15 +19,38 @@
     ////////////////
 
     function activate() {
-      vm.ok = ok;
-      vm.cancel = cancel;
+      vm.close = closeModal;
+      vm.products = cartService.getCart();
+      vm.removeOne = removeOneItem;
+      vm.addOne = addOneItem;
+      vm.remove = removeItem;
+      vm.pickUps = getPickUps;
+      vm.checkout = checkout;
     }
 
-    function cancel() {
-      $uibModalInstance.dismiss();
+    function checkout(){
+      //shit just get real
+      //closeModal();
+      //cartService.clear();
     }
 
-    function ok() {
+    function getPickUps(){
+      //insert voodoo magic here
+    }
+
+    function removeOneItem(product){
+      cartService.removeOne(product);
+    }
+
+    function addOneItem(product){
+      cartService.addOne(product);
+    }
+
+    function removeItem(product){
+      cartService.remove(product);
+    }
+
+    function closeModal() {
       $uibModalInstance.close();
     }
 
