@@ -5,22 +5,22 @@
   <table class="table table-striped table-bordered">
     <thead>
     <tr>
-      <th>Termék</th>
-      <th>Darab</th>
-      <th>Egység ár</th>
-      <th>Összesen</th>
+      <th class="text-center">Termék</th>
+      <th class="text-center">Darab</th>
+      <th class="text-center">Egység ár</th>
+      <th class="text-center">Összesen</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="product in vm.products">
-      <td>{{product.name}}</td>
-      <td>
+      <td class="text-center">{{product.name}}</td>
+      <td class="text-center">
         <span class="glyphicon glyphicon-minus" ng-click="vm.removeOne(product)" aria-hidden="true"></span>
         {{product.amount}}
         <span class="glyphicon glyphicon-plus" ng-click="vm.addOne(product)" aria-hidden="true"></span>
       </td>
-      <td>{{product.price}}</td>
-      <td>{{product.amount * product.price}}</td>
+      <td class="text-center">{{product.price}}</td>
+      <td class="text-center">{{product.amount * product.price}}</td>
     </tr>
     </tbody>
   </table>
