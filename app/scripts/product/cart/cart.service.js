@@ -57,11 +57,13 @@
     function remove(obj) {
       var index = cart.indexOf(obj);
       cart.splice(index, 1);
+      $rootScope.$emit('cart.remove', cart.length);
       $log.info('Removed product from cart. Product:', obj);
     }
 
     function clear() {
       cart = [];
+      $rootScope.$emit('cart.clear', 0);
       $log.info('Emptied cart.');
     }
 
