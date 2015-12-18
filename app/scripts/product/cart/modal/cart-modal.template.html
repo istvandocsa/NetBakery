@@ -1,10 +1,29 @@
 <div class="modal-header">
-  <h3 class="modal-title">I'm a modal!</h3>
+  <button type="button" class="close" ng-click="vm.close()"><span aria-hidden="true">&times;</span></button>
 </div>
 <div class="modal-body">
-  Cart modal example body.
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Termék</th>
+      <th>Darab</th>
+      <th>Egység ár</th>
+      <th>Összesen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="product in vm.products">
+      <td>{{product.name}}</td>
+      <td>
+        <span class="glyphicon glyphicon-minus" ng-click="vm.removeOne(product)" aria-hidden="true"></span>
+        {{product.amount}}
+        <span class="glyphicon glyphicon-plus" ng-click="vm.addOne(product)" aria-hidden="true"></span>
+      </td>
+      <td>{{product.price}}</td>
+      <td>{{product.amount * product.price}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
-  <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
 </div>
