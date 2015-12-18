@@ -26,6 +26,7 @@
       vm.remove = removeItem;
       vm.pickUps = getPickUps;
       vm.checkout = checkout;
+      vm.getTotal = totalPrice;
     }
 
     function checkout(){
@@ -52,6 +53,15 @@
 
     function closeModal() {
       $uibModalInstance.close();
+    }
+
+    //This is being called three times i have no clue why
+    function totalPrice(){
+      var total = 0;
+      angular.forEach(vm.products, function(product){
+        total += product.price * product.amount;
+      });
+      return total;
     }
 
   }

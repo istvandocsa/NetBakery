@@ -23,6 +23,13 @@
       <td class="text-center">{{product.amount * product.price}}</td>
     </tr>
     </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2"></td>
+      <td class="text-right"><strong>Összesen:</strong></td>
+      <td class="text-center"><strong>{{vm.getTotal()}}</strong></td>
+    </tr>
+    </tfoot>
   </table>
 </div>
 <div class="modal-footer">
