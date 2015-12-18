@@ -38,19 +38,16 @@
       //insert voodoo magic here
     }
 
-    function removeOneItem(){
-      var order = {name: vm.product.name, amount: vm.product.amount};
-      cartService.removeOne(order);
+    function removeOneItem(product){
+      cartService.removeOne(product);
     }
 
-    function addOneItem(){
-      var order = {name: vm.product.name, amount: vm.product.amount};
-      cartService.addOne(order);
+    function addOneItem(product){
+      cartService.addOne(product);
     }
 
-    function removeItem(){
-      var order = {name: vm.product.name};
-      cartService.remove(order);
+    function removeItem(product){
+      cartService.remove(product);
     }
 
     function closeModal() {
