@@ -19,5 +19,6 @@ angular
     'ngTouch',
     'angularSpinner',
     'firebase',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angular-spinkit'
   ]);
