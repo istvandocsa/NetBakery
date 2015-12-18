@@ -46,7 +46,7 @@
 
     function removeOne(obj) {
       var product = $filter('filter')(cart, obj.name)[0];
-      if (product.amount != 1) {
+      if (product.amount > 1) {
         product.amount--;
       } else {
         remove(product);
