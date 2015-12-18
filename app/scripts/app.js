@@ -19,6 +19,5 @@ angular
     'ngTouch',
     'angularSpinner',
     'firebase',
-    'ui.bootstrap',
-    'angularModalService'
+    'ui.bootstrap'
   ]);
