@@ -21,9 +21,10 @@
 
     ////////////////
 
-    function show(templateUrl, controller) {
+    function show(templateUrl, controller, size) {
       var modalInstance = $uibModal.open({
         animation: true,
+        size: size,
         templateUrl: templateUrl,
         controller: controller,
         controllerAs: 'vm',

@@ -60,6 +60,10 @@ body {
   margin-top: 28px;
 }
 
+.show-pointer{
+  cursor: pointer;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

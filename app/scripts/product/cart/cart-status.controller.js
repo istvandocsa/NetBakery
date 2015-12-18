@@ -31,7 +31,9 @@
     }
 
     function showCartModal() {
-      modalService.show("scripts/product/cart/modal/cart-modal.template.html", "CartModalController");
+      if (vm.cartSize > 0) {
+        modalService.show("scripts/product/cart/modal/cart-modal.template.html", "CartModalController", "md");
+      }
     }
   }
 
