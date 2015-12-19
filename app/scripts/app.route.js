@@ -4,7 +4,7 @@
 'use strict';
 angular
   .module('app')
-  .config(function(stateHelperProvider, $urlRouterProvider) {
+  .config(function (stateHelperProvider, $urlRouterProvider) {
 
     $urlRouterProvider
       .when('/credential', '/credential/login')
@@ -59,7 +59,7 @@ angular
           }
         ]
       })
-		 .state({
+      .state({
         name: 'price-list',
         url: '/admin/price-list',
         templateUrl: 'scripts/product/price/price-list.template.html',
