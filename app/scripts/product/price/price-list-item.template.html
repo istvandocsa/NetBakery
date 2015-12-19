@@ -1,0 +1,16 @@
+<td>{{vm.i + 1}}</td>
+<td>{{vm.p.name}}</td>
+<td>
+  <span ng-hide="vm.editable">{{vm.p.price}} Ft</span>
+
+  <div class="col-md-4" ng-show="vm.editable">
+    <input type="number" ng-model="vm.p.price" class="form-control"/>
+  </div>
+</td>
+<td>
+  <span class="glyphicon glyphicon-ok show-pointer" aria-hidden="true" ng-show="vm.editable"
+        ng-click="vm.editable = false; vm.save()"></span>
+  <span class="glyphicon glyphicon-cog show-pointer" aria-hidden="true" ng-hide="vm.editable"
+        ng-click="vm.editable = true"></span>
+</td>
+

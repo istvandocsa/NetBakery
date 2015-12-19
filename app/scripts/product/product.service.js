@@ -6,12 +6,12 @@
 
   angular
     .module('app')
-    .factory('productsService', productsService);
+    .factory('productService', productService);
 
-  productsService.$inject = ['firebaseService'];
+  productService.$inject = ['firebaseService'];
 
   /* @ngInject */
-  function productsService(firebaseService) {
+  function productService(firebaseService) {
     var service = {
       getProducts: getProducts
     };

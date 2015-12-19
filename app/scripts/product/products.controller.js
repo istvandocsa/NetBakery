@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductsController', ProductsController);
 
-  ProductsController.$inject = ['productsService'];
+  ProductsController.$inject = ['productService'];
 
   /* @ngInject */
-  function ProductsController(productsService) {
+  function ProductsController(productService) {
     var vm = this;
 
     activate();
@@ -19,7 +19,7 @@
     ////////////////
 
     function activate() {
-      vm.products = productsService.getProducts();
+      vm.products = productService.getProducts();
     }
   }
 
