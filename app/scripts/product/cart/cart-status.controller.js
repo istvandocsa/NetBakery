@@ -19,17 +19,21 @@
     ////////////////
 
     function activate() {
-      $rootScope.$on('cart.add',  cartSize);
+      $rootScope.$on('cart.add', cartSize);
+      $rootScope.$on('cart.remove', cartSize);
+      $rootScope.$on('cart.clear', cartSize);
       vm.cartSize = 0;
       vm.showCartModal = showCartModal;
     }
 
-    function cartSize(event, data){
-      vm.cartSize=data;
+    function cartSize(event, data) {
+      vm.cartSize = data;
     }
 
-    function showCartModal(){
-      modalService.show("scripts/product/cart/modal/cart-modal.template.html", "CartModalController");
+    function showCartModal() {
+      if (vm.cartSize > 0) {
+        modalService.show("scripts/product/cart/modal/cart-modal.template.html", "CartModalController", "md");
+      }
     }
   }
 

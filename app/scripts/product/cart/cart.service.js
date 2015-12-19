@@ -48,10 +48,10 @@
       var product = $filter('filter')(cart, obj.name)[0];
       if (product.amount > 1) {
         product.amount--;
+        $log.info('Decreased product amount by one. Product:', product);
       } else {
         remove(product);
       }
-      $log.info('Decreased product amount by one. Product:', product);
     }
 
     function remove(obj) {
