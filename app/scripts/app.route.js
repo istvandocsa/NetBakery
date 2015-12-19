@@ -4,7 +4,7 @@
 'use strict';
 angular
   .module('app')
-  .config(function(stateHelperProvider, $urlRouterProvider) {
+  .config(function (stateHelperProvider, $urlRouterProvider) {
 
     $urlRouterProvider
       .when('/credential', '/credential/login')
@@ -41,6 +41,20 @@ angular
             url: '/login',
             templateUrl: 'scripts/credential/login/credential.login.template.html',
             controller: 'LoginController',
+            controllerAs: 'vm'
+          }
+        ]
+      })
+      .state({
+        name: 'report',
+        url: '/report',
+        templateUrl: 'scripts/report/report.template.html',
+        children: [
+          {
+            name: 'popularItems',
+            url: '/popularItems',
+            templateUrl: 'scripts/report/popular/popular-item-template.html',
+            controller: 'PopularItemsController',
             controllerAs: 'vm'
           }
         ]
