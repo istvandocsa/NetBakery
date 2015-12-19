@@ -12,21 +12,20 @@
    * # MainCtrl
    * Controller of the Navbar on the top
    */
-  NavigationController.$inject = ['$location'];
+  NavigationController.$inject = ['$location', '$log', 'firebaseService'];
 
   /* @ngInject */
-  function NavigationController($stateProvider) {
+  function NavigationController($stateProvider, $log, firebaseService) {
     var vm = this;
-    vm.title = 'NavigationController';
-    vm.brand = 'NetBakery';
-    vm.menuItems;
-    vm.activeState = getActiveState;
 
     activate();
 
     ////////////////
 
     function activate() {
+      vm.brand = 'NetBakery';
+      vm.activeState = getActiveState;
+
       vm.menuItems = [
         {
           name: 'Kezdőoldal',
@@ -36,6 +35,11 @@
         {
           name: 'Belépés',
           state: 'credential',
+          simpleType: true
+        },
+        {
+          name: 'Raktár',
+          state: 'stock',
           simpleType: true
         },
         {
