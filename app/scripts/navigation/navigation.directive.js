@@ -14,7 +14,7 @@
   function navigation() {
     var directive = {
       bindToController: true,
-      templateUrl: 'scripts/navigation/navigation.directive.html',
+      templateUrl: 'scripts/navigation/navigation.template.html',
       controller: 'NavigationController',
       controllerAs: 'vm',
       link: link,

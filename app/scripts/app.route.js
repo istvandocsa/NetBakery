@@ -36,6 +36,13 @@ angular
             controllerAs: 'vm'
           }
         ]
+      })
+      .state({
+        name: 'price-list',
+        url: '/admin/price-list',
+        templateUrl: 'scripts/product/price/price-list.template.html',
+        controller: 'PriceListController',
+        controllerAs: 'vm'
       });
 
   });
