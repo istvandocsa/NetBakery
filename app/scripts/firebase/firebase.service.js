@@ -35,7 +35,9 @@
     }
 
     function getObject(url){
-      return $firebaseObject(firebaseReference.child(url));
+      var currentReference = firebaseReference.child(url);
+      $log.info('Getting object for path: ' + currentReference.toString());
+      return $firebaseObject(currentReference);
     }
   }
 

@@ -14,9 +14,7 @@ angular
       .state({
         name: 'home',
         url: '/',
-        templateUrl: 'scripts/home/home.template.html',
-        controller: 'HomeController',
-        controllerAs: 'vm'
+        templateUrl: 'scripts/home/home.template.html'
       })
       .state({
         name: 'credential',

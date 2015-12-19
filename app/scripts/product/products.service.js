@@ -20,7 +20,7 @@
     ////////////////
 
     function getProducts() {
-      return firebaseService.getArray('products')
+      return firebaseService.getArray('products');
     }
   }
 
