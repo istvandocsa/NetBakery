@@ -8,10 +8,10 @@
     .module('app')
     .controller('PriceListController', PriceListController);
 
-  PriceListController.$inject = [];
+  PriceListController.$inject = ['productService'];
 
   /* @ngInject */
-  function PriceListController() {
+  function PriceListController(productService) {
     var vm = this;
 
     activate();
@@ -19,7 +19,11 @@
     ////////////////
 
     function activate() {
+      vm.products = getProducts();
+    }
 
+    function getProducts() {
+      return productService.getProducts();
     }
   }
 
