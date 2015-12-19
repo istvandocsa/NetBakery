@@ -21,8 +21,7 @@
     ////////////////
 
     function activate() {
-      console.log('activate');
-      uibDatepickerConfig.minDate = date;
+setup();
       vm.close = closeModal;
       vm.products = cartService.getCart();
       vm.removeOne = removeOneItem;
@@ -85,6 +84,12 @@
       closeModal();
     }
 
+    function setup(){
+      if(date.getHours() >= 12){
+         date.setDate(date.getDate() + 1);
+      }
+      uibDatepickerConfig.minDate = date;
+    }
   }
 
 })();
