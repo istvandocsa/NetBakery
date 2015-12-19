@@ -1,0 +1,21 @@
+<div class="container" witdh="100%">
+  <div class="row">
+    <div>{{vm.currentDate | date }}</div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th width="40%">Azonosító</th>
+        <th width="20%">Termék neve</th>
+        <th>Lejárati dátum</th>
+        <th>Mennyiség</th>
+        <th>Állapot</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in vm.stock" stock-view-item="item" index="$index" class="stock-view-row">
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

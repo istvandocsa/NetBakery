@@ -8,6 +8,7 @@ angular
 
     $urlRouterProvider
       .when('/credential', '/credential/login')
+      .when('/stockManager', '/stockManager/stock')
       .otherwise('/');
 
     stateHelperProvider
@@ -15,6 +16,13 @@ angular
         name: 'home',
         url: '/',
         templateUrl: 'scripts/home/home.template.html'
+      })
+      .state({
+        name: 'stock',
+        url: '/stockManager/stock',
+        templateUrl: 'scripts/ingredient/stock/stock-view.template.html',
+        controller: 'StockController',
+        controllerAs: 'vm'
       })
       .state({
         name: 'credential',
