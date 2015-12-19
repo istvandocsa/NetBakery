@@ -18,7 +18,7 @@
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li ng-repeat="state in item.subStates" >
-              <a ui-sref="{{state.state}}">{{state.name}}</a>
+              <a ui-sref="{{item.state}}.{{state.state}}">{{state.name}}</a>
             </li>
           </ul>
         </li>
