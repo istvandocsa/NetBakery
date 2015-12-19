@@ -16,6 +16,7 @@
     var date = new Date();
     var ingredients;
     var stock;
+    var allowToOrder;
 
     activate();
 
@@ -39,24 +40,48 @@
     }
 
     function checkout() {
+      var msg;
       getIngredients();
       getStock().then(function () {
-        console.log('cica');
-        console.log(stock);
-        if (hasEnoughIngredients()) {
+        hasEnoughIngredients();
+        if (allowToOrder) {
+          var amount;
           angular.forEach(ingredients, function (ingredient) {
-
-            firebaseService.updateObject('/stock/' + ingredient.$id, {quantity: -ingredient.quantity});
+            amount = ingredient.quantity;
+            angular.forEach(stock, function (item) {
+              if (item.ingredientId === ingredient.ingredientId) {
+                firebaseService.getObject('/stock/' + item.$id).$loaded().then(function (stockItem) {
+                  if (stockItem.quantity <= amount) {
+                    amount -= stockItem.quantity;
+                    stockItem.$remove();
+                  } else {
+                    stockItem.quantity -= amount;
+                    stockItem.$save();
+                    return true;
+                  }
+                });
+              }
+            });
           });
-          modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: vm.items});
+          msg = 'Sikeres vásárlás!';
           $log.info('OMG he is going for it!!!! For real real, not just for play play.');
+        } else {
+          msg = 'Sikertelen vásárlás!';
         }
+        modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: msg});
       });
     }
 
     function getPickUps() {
-      //insert voodoo magic here
-      $log.info('Loaded pickups.');
+      return [
+        {city: 'Budapest'},
+        {city: 'Debrecen'},
+        {city: 'Szeged'},
+        {city: 'Sopron'},
+        {city: 'Pécs'},
+        {city: 'Békéscsaba'}
+      ];
+
     }
 
     function removeOneItem(product) {
@@ -105,25 +130,30 @@
 
     function hasEnoughIngredients() {
       var stockItem;
+      allowToOrder = true;
+      var result = getStockSum();
       angular.forEach(ingredients, function (ingredient) {
-        stockItem = $filter('filter')(stock, function (item) {
+        stockItem = $filter('filter')(result, function (item) {
           return item.ingredientId === ingredient.ingredientId;
         });
 
-        if (stockItem[0].quantity < ingredient.quantity) {
-          return false;
+        if (stockItem.length == 0 || stockItem[0].quantity < ingredient.quantity) {
+          allowToOrder = false;
+          return allowToOrder;
         }
       });
-      return true;
     }
 
     function getIngredients() {
       ingredients = [];
+      var ingredient;
+
       angular.forEach(vm.products, function (product) {
         angular.forEach(product.ingredients, function (item) {
-          var ingredient = $filter('filter')(ingredients, function (ing) {
+          ingredient = $filter('filter')(ingredients, function (ing) {
             return ing.ingredientId === item.ingredientId;
           });
+          item.quantity *= product.amount;
           if (ingredient.length == 0) {
             ingredients.push(item);
           } else {
@@ -131,6 +161,22 @@
           }
         });
       });
+    }
+
+    function getStockSum() {
+      var stockItem;
+      var result = [];
+      angular.forEach(stock, function (item) {
+        stockItem = $filter('filter')(result, function (obj) {
+          return obj.ingredientId === item.ingredientId;
+        });
+        if (stockItem.length == 0) {
+          result.push(item);
+        } else {
+          stockItem[0].quantity += item.quantity;
+        }
+      });
+      return result;
     }
 
     function getStock() {
@@ -141,7 +187,6 @@
         });
       });
     }
-
   }
 
 })();

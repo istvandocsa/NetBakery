@@ -23,7 +23,7 @@
 
     function closeModal() {
       $uibModalInstance.close();
-      $rootScope.$emit('notification.closed');
+      $rootScope.$emit('notification.closed', vm.message === 'Sikeres vásárlás!');
     }
   }
 
