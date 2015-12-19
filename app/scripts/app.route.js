@@ -46,6 +46,20 @@ angular
         ]
       })
       .state({
+        name: 'report',
+        url: '/report',
+        templateUrl: 'scripts/report/report.template.html',
+        children: [
+          {
+            name: 'popularItems',
+            url: '/popularItems',
+            templateUrl: 'scripts/report/popular/popular-item-template.html',
+            controller: 'PopularItemsController',
+            controllerAs: 'vm'
+          }
+        ]
+      })
+		 .state({
         name: 'price-list',
         url: '/admin/price-list',
         templateUrl: 'scripts/product/price/price-list.template.html',

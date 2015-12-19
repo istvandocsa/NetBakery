@@ -45,10 +45,9 @@
         {
           name: 'Kimutatás készítése',
           simpleType: false,
+          state: 'report',
           subStates: [
-            {state : 'popular' , name : 'Népszerű termékek'},
-            {state : 'neverUser', name : 'Sohasem használt termékek'},
-            {state : 'ingredientsOrders' , name : 'Alapanyag rendelés'}
+            {state : 'popularItems' , name : 'Népszerű termékek'}
           ]
         }
       ];
