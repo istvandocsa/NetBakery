@@ -5,9 +5,9 @@
     .module('app')
     .controller('PopularItemsController', PopularItemsController);
 
-  PopularItemsController.$inject = ['orderService'];
+  PopularItemsController.$inject = ['orderService', 'productService'];
 
-  function PopularItemsController(orderService) {
+  function PopularItemsController(orderService, productService) {
     var vm = this;
 
     activate();
@@ -55,8 +55,12 @@
         });
 
         map.forEach( function( value ) {
-          vm.labels.push( value.productId );
-          vm.data.push( value.quantity );
+
+          getName(value.productId).$loaded().then( function(product) {
+            vm.labels.push(product.name);
+            vm.data.push( value.quantity );
+          });
+
         });
 
       });
@@ -71,6 +75,10 @@
         }
       });
       return result;
+    }
+
+    function getName(id) {
+      return productService.getProductById(id);
     }
 
     function containsKey(map, key) {

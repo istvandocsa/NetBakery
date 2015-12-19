@@ -13,7 +13,8 @@
   /* @ngInject */
   function productService(firebaseService) {
     var service = {
-      getProducts: getProducts
+      getProducts: getProducts,
+      getProductById: getProductById
     };
     return service;
 
@@ -21,6 +22,10 @@
 
     function getProducts() {
       return firebaseService.getArray('products');
+    }
+
+    function getProductById(id) {
+      return firebaseService.getObject("products/" + id)
     }
   }
 
