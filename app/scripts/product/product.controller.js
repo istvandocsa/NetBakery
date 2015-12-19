@@ -25,7 +25,7 @@
 
     function clickOnAdd() {
       if (vm.amountToAdd > 0) {
-        var order = {id: vm.object.$id, name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd};
+        var order = {id: vm.object.$id, name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd, ingredients: vm.object.ingredients};
         cartService.add(order);
         vm.amountToAdd = 0;
       }

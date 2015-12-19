@@ -8,36 +8,22 @@
     .module('app')
     .controller('CartNotificationController', CartNotificationController);
 
-  CartNotificationController.$inject = ['$uibModalInstance', '$rootScope'];
-
   /* @ngInject */
-  function CartNotificationController($uibModalInstance, $rootScope) {
+  function CartNotificationController($uibModalInstance, $rootScope, items) {
     var vm = this;
-    var shoppingSuccess;
 
     activate();
 
     ////////////////
 
     function activate() {
-      vm.message = setup();
+      vm.message = items.message;
       vm.close = closeModal;
-    }
-
-    function setup() {
-      var fate = Math.floor((Math.random() * 3));
-      if (fate % 2 != 0) {
-        shoppingSuccess = false;
-        return 'Sikertelen fizetés!';
-      } else {
-        shoppingSuccess = true;
-        return 'Sikeres fizetés!';
-      }
     }
 
     function closeModal() {
       $uibModalInstance.close();
-      $rootScope.$emit('notification.closed', shoppingSuccess);
+      $rootScope.$emit('notification.closed');
     }
   }
 

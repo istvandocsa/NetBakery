@@ -21,14 +21,19 @@
 
     ////////////////
 
-    function show(templateUrl, controller, size) {
+    function show(templateUrl, controller, size, items) {
       return $uibModal.open({
         animation: true,
         size: size,
         templateUrl: templateUrl,
         controller: controller,
         controllerAs: 'vm',
-        bindToController: true
+        bindToController: true,
+        resolve: {
+          items: function () {
+            return items;
+          }
+        }
       });
     }
   }
