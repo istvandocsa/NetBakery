@@ -41,10 +41,10 @@
       return $firebaseObject(currentReference);
     }
 
-    function updateObject(url){
+    function updateObject(url, obj){
       var currentReference = firebaseReference.child(url);
       $log.info('Updating object for path: ' + currentReference.toString());
-      currentReference.update(obj)
+      currentReference.update(obj);
     }
 
   }

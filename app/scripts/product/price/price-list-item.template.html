@@ -9,7 +9,7 @@
 </td>
 <td>
   <span class="glyphicon glyphicon-ok show-pointer" aria-hidden="true" ng-show="vm.editable"
-        ng-click="vm.editable = false"></span>
+        ng-click="vm.editable = false; vm.save()"></span>
   <span class="glyphicon glyphicon-cog show-pointer" aria-hidden="true" ng-hide="vm.editable"
         ng-click="vm.editable = true"></span>
 </td>

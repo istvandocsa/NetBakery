@@ -24,8 +24,7 @@
 
     function save() {
       var url = '/products/' + vm.p.$id;
-      var product = firebaseService.getObject(url);
-      product.price = vm.p.price;
+      firebaseService.updateObject(url, {price: vm.p.price});
     }
   }
 
