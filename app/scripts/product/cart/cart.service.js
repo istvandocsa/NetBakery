@@ -26,7 +26,7 @@
     ////////////////
 
     function add(obj) {
-      var product = $filter('filter')(cart, obj.name);
+      var product = $filter('filter')(cart, obj.$id);
 
       if (product.length == 0) {
         cart.push(obj);
@@ -39,13 +39,13 @@
     }
 
     function addOne(obj) {
-      var product = $filter('filter')(cart, obj.name)[0];
+      var product = $filter('filter')(cart, obj.$id)[0];
       product.amount++;
       $log.info('Increased product amount by one. Product:', product);
     }
 
     function removeOne(obj) {
-      var product = $filter('filter')(cart, obj.name)[0];
+      var product = $filter('filter')(cart, obj.$id)[0];
       if (product.amount > 1) {
         product.amount--;
         $log.info('Decreased product amount by one. Product:', product);
