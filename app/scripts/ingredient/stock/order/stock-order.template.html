@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title text-center">Raktárkészlet rendelés</h4>
+</div>
+<div class="modal-body">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th width="50%">Termék neve</th>
+      <th width="25%">Mennyiség</th>
+      <th width="25%">Lejárati dátum</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in vm.addedOrders">
+      <td>{{item.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.expiryDate | date}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+    <div class="row">
+      <div class="col-md-1">
+        <button class="btn btn-primary form-control" ng-click="vm.addNewOrderItem()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="col-md-3">
+        <select class="form-control col-md-5" ng-model="vm.current.id">
+          <option ng-repeat="ingredient in vm.ingredients" value="{{ingredient.$id}}">{{ingredient.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control col-md-2" ng-model="vm.current.quantity"
+               placeholder="Mennyiség" required>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input type="datetime" class="form-control col-md-4" uib-datepicker-popup="yyyy-MM-dd"
+                 ng-model="vm.current.expiryDate"
+                 is-open="vm.isCalendarOpened" ng-required="true" show-button-bar="false" placeholder="Dátum"/>
+            <span class="btn btn-default input-group-addon" ng-click="vm.isCalendarOpened = true">
+              <i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+    <button class="btn btn-success" ng-click="vm.close()">Rendelés</button>
+  </div>
+</div>
