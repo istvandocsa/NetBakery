@@ -5,3 +5,7 @@
 #shop-controller input {
   width: 51px;
 }
+
+.thumbnail img {
+  height:150px !important;
+}

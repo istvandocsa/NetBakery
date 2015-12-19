@@ -7,7 +7,7 @@
 
 body {
   padding: 0;
-  background: url("/images/NetBakery.png") no-repeat fixed bottom;
+  background: url("/app/images/NetBakery.png") no-repeat fixed bottom;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -94,9 +94,5 @@ body {
 
   .dw-loading-text {
     visibility: hidden;
-  }
-
-  .thumbnail img {
-    height:150px;
   }
 }
