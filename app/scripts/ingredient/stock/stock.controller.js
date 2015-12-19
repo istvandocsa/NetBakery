@@ -8,10 +8,10 @@
     .module('app')
     .controller('StockController', StockController);
 
-  StockController.$inject = ['$log', '$rootScope', '$filter', 'firebaseService'];
+  StockController.$inject = ['$log', '$rootScope', '$filter', 'firebaseService', 'modalService'];
 
   /* @ngInject */
-  function StockController($log, $rootScope, $filter, firebaseService) {
+  function StockController($log, $rootScope, $filter, firebaseService, modalService) {
     var vm = this;
 
     activate();
@@ -21,10 +21,12 @@
     function activate() {
       vm.currentDate = new Date();
 
+      vm.openStockOrder = openStockOrder;
+
       $rootScope.$on("stock-item-dispose", handleItemDispose);
+      $rootScope.$on("stock-order-finish", handleStockOrder);
 
       firebaseService.getArray("/stock").$loaded().then(function(items){
-        console.log(items);
         vm.stock = items;
       });
 
@@ -37,6 +39,21 @@
         $log.debug(vm.stock.length);
       }
 
+      function openStockOrder(){
+        modalService.show("scripts/ingredient/stock/order/stock-order.template.html", "StockOrderController", "lg");
+      }
+
+      function handleStockOrder(event, order){
+        $log.info("Received order request. {}", order);
+        firebaseService.getArray("/stock").$loaded().then(function(stock){
+          angular.forEach(order, function(item){
+            var orderItem = {expiryDate: item.expiryDate.toISOString(), ingredientId: item.id, quantity: item.quantity};
+            $log.info("Adding order item into stock. {}", orderItem);
+            stock.$add(orderItem);
+          });
+          stock.$save();
+        });
+      }
     }
   }
 })();
