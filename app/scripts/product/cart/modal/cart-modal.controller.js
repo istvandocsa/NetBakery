@@ -8,18 +8,20 @@
     .module('app')
     .controller('CartModalController', CartModalController);
 
-  CartModalController.$inject = ['$uibModalInstance', 'cartService', 'uibDatepickerConfig', '$log'];
+  CartModalController.$inject = ['$uibModalInstance', 'cartService', 'uibDatepickerConfig', '$log', 'modalService', '$rootScope'];
 
   /* @ngInject */
-  function CartModalController($uibModalInstance, cartService, uibDatepickerConfig, $log) {
+  function CartModalController($uibModalInstance, cartService, uibDatepickerConfig, $log, modalService, $rootScope) {
     var vm = this;
     var date = new Date();
+    var notification;
 
     activate();
 
     ////////////////
 
     function activate() {
+      console.log('activate');
       uibDatepickerConfig.minDate = date;
       vm.close = closeModal;
       vm.products = cartService.getCart();
@@ -33,12 +35,11 @@
       vm.openCalendar = openCalendar;
       vm.isCalendarOpened = false;
       vm.deliveryTime = date;
+      $rootScope.$on('notification.closed', finishShopping);
     }
 
     function checkout() {
-      //shit just get real
-      //closeModal();
-      //cartService.clear();
+      notification = modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm');
       $log.info('OMG he is going for it!!!! For real real, not just for play play.');
     }
 
@@ -64,19 +65,24 @@
       $log.info('Cart modal has been closed.');
     }
 
-    //This is being called three times i have no clue why
     function totalPrice() {
       var total = 0;
       angular.forEach(vm.products, function (product) {
         total += product.price * product.amount;
       });
-      $log.debug('Counting total');
       return total;
     }
 
     function openCalendar() {
       vm.isCalendarOpened = true;
       $log.info('Calendar has been opened.');
+    }
+
+    function finishShopping(event, data) {
+      if(data){
+        cartService.clear();
+      }
+      closeModal();
     }
 
   }
