@@ -17,15 +17,10 @@
       templateUrl: 'scripts/product/cart/cart-status.template.html',
       controller: 'CartStatusController',
       controllerAs: 'vm',
-      link: link,
       restrict: 'E',
       scope: {}
     };
     return directive;
-
-    function link(scope, element, attrs) {
-
-    }
   }
 
 

@@ -17,15 +17,10 @@
       templateUrl: 'scripts/navigation/navigation.template.html',
       controller: 'NavigationController',
       controllerAs: 'vm',
-      link: link,
       restrict: 'E',
       scope: {}
     };
     return directive;
-
-    function link(scope, element, attrs) {
-
-    }
   }
 })();
 
