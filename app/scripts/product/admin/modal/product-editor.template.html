@@ -2,13 +2,13 @@
   <h4 class="modal-title">Termék</h4>
 </div>
 <div class="modal-body">
-  <form class="form-horizontal">
+  <form class="form-horizontal" name="prod">
     <div class="form-group">
       <label class="col-md-4 control-label" for="name">Termék neve:</label>
 
       <div class="col-md-4">
         <input id="name" ng-model="vm.product.name" placeholder="Pl: Kakóscsiga" class="form-control input-md"
-               type="text">
+               type="text" required>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
 
       <div class="col-md-4">
         <input id="image" ng-model="vm.product.url" placeholder="http://google.hu/test.jpg"
-               class="form-control input-md" type="text">
+               class="form-control input-md" type="text" required>
       </div>
     </div>
 
@@ -25,30 +25,34 @@
       <label class="col-md-4 control-label" for="price">Ár:</label>
 
       <div class="col-md-4">
-        <input id="price" ng-model="vm.product.price" placeholder="123" class="form-control input-md" type="number">
+        <input id="price" ng-model="vm.product.price" placeholder="123" class="form-control input-md" type="number" required>
       </div>
     </div>
-
+  </form>
+  <form name="ing" class="form-horizontal">
     <div class="form-group">
       <label class="col-md-4 control-label" for="ingredients">Recept:</label>
 
       <div class="col-md-3">
-        <select id="ingredients" class="form-control" ng-model="vm.selectedIngredient">
+        <select id="ingredients" class="form-control" ng-model="vm.selectedIngredient" required>
           <option ng-repeat="ingredient in vm.ingredients" value="{{ingredient.$id}}">{{ingredient.name}}</option>
         </select>
       </div>
       <div class="col-md-2">
-        <input type="number" class="form-control" placeholder="Mennyiség" ng-model="vm.selectedIngredientAmount"/>
+        <input type="number" class="form-control" placeholder="Mennyiség" ng-model="vm.selectedIngredientAmount"
+               required/>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-default" type="button" ng-click="vm.add()">Hozzáadás</button>
+        <button class="btn btn-default" type="button" ng-click="vm.add()"
+                ng-disabled="ing.$invalid">Hozzáadás
+        </button>
       </div>
     </div>
   </form>
   <table class="table table-striped">
     <thead>
     <tr>
-    <th>#</th>
+      <th>#</th>
       <th>Neve</th>
       <th>Mennyisége (Gramm)</th>
       <th></th>
@@ -60,5 +64,5 @@
   </table>
 </div>
 <div class="modal-footer text-right">
-  <button class="btn btn-success" type="button" ng-click="vm.delete()">Mentés</button>
+  <button class="btn btn-success" type="button" ng-click="vm.save()" ng-disabled="prod.$invalid">Mentés</button>
 </div>

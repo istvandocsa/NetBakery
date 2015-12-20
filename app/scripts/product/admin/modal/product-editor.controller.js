@@ -56,6 +56,14 @@
       firebaseService.getArray('/products/' + vm.product.$id + '/ingredients/').$loaded().then(function (items) {
         items.$add(item);
       });
+
+      var name = firebaseService.getObject("/ingredients/" + item.ingredientId + '/name');
+
+      vm.productIngredients.push({
+        name: name,
+        ingredientId: vm.selectedIngredient,
+        quantity: vm.selectedIngredientAmount
+      });
     }
   }
 
