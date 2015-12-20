@@ -14,15 +14,10 @@
       templateUrl: 'scripts/product/products.template.html',
       controller: 'ProductsController',
       controllerAs: 'vm',
-      link: link,
       restrict: 'E',
       scope: {}
     };
     return directive;
-
-    function link(scope, element, attrs) {
-
-    }
   }
 })();
 

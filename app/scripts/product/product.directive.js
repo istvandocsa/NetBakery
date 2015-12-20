@@ -17,17 +17,12 @@
       templateUrl: 'scripts/product/product.template.html',
       controller: 'ProductController',
       controllerAs: 'vm',
-      link: link,
       restrict: 'E',
       scope: {
         object : "="
       }
     };
     return directive;
-
-    function link(scope, element, attrs) {
-
-    }
   }
 })();
 

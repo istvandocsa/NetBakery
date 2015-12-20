@@ -25,7 +25,7 @@
     }
 
     function getProductById(id) {
-      return firebaseService.getObject("products/" + id)
+      return firebaseService.getObject("products/" + id);
     }
 
   }
