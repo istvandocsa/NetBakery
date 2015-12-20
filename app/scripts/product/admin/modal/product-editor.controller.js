@@ -25,6 +25,7 @@
       });
       vm.productIngredients = getProductIngredients();
       $rootScope.$on('remove.ingredient', removeItem);
+      vm.add = add;
     }
 
     function getProductIngredients() {
@@ -40,13 +41,20 @@
     function removeItem(event, data) {
       var result = [];
       firebaseService.getArray('/products/' + vm.product.$id + '/ingredients/').$loaded().then(function (items) {
-        angular.forEach(items, function(item){
-          if(item.ingredientId != data){
+        angular.forEach(items, function (item) {
+          if (item.ingredientId != data) {
             result.push({ingredientId: item.ingredientId, quantity: item.quantity});
           }
         });
         vm.productIngredients = result;
-        firebaseService.updateArray('/products/' + vm.product.$id + '/ingredients/' , result);
+        firebaseService.updateArray('/products/' + vm.product.$id + '/ingredients/', result);
+      });
+    }
+
+    function add() {
+      var item = {ingredientId: vm.selectedIngredient, quantity: vm.selectedIngredientAmount};
+      firebaseService.getArray('/products/' + vm.product.$id + '/ingredients/').$loaded().then(function (items) {
+        items.$add(item);
       });
     }
   }
