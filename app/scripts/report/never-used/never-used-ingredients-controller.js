@@ -57,19 +57,38 @@
 
           angular.forEach(ingredients, function (ingredient) {
 
+            //console.log( usedIngredientIdsList, ingredient.name, ingredient.$id, listContainsId(ingredient.$id, usedIngredientIdsList) );
+
             if (!listContainsId(ingredient.$id, usedIngredientIdsList)) {
 
               if (!existsInMap(ingredient, neverUsedIngredientsList)) {
                 neverUsedIngredientsList.push(ingredient);
               }
             } else {
-              neverUsedIngredientsList.pop(ingredient);
+
+              while( getPositionOfIngredientId(ingredient.$id, neverUsedIngredientsList) !== -1 ) {
+                var position = getPositionOfIngredientId(ingredient.$id, neverUsedIngredientsList);
+                neverUsedIngredientsList.splice(position, 1);
+              }
             }
 
           });
         });
       });
       return neverUsedIngredientsList;
+    }
+
+    function getPositionOfIngredientId(id, neverUsedIngredientsList) {
+
+      var result = -1;
+
+      for (var i = 0; i < neverUsedIngredientsList.length; ++i) {
+
+        if (neverUsedIngredientsList[i].$id === id) {
+          result = i;
+        }
+      }
+      return result;
     }
 
     function existsInMap(ingredient, map) {
