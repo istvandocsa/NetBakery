@@ -1,15 +1,16 @@
 <div class="thumbnail" ng-mouseenter="vm.hover=true" ng-mouseleave="vm.hover=false">
   <img ng-src="{{vm.object.url}}" alt={{vm.object.name}}">
+
   <div class="caption">
     <h4>{{vm.object.name}}</h4>
+
     <div class="text-right">Ár: {{vm.object.price}} Ft</div>
-    <div class="row" id="shop-controller">
-      <div class="col-md-6">
-       <input ng-model="vm.amountToAdd" type="number" class="form-control">
-      </div>
-      <div class="col-md-6 text-right">
-        <button class="btn btn-default" ng-click="vm.clickOnAdd()"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
-      </div>
+    <div data-allow access="USER">
+      <user-product-controls></user-product-controls>
+    </div>
+
+    <div data-allow access="ADMIN">
+      <admin-product-controls product="vm.object"></admin-product-controls>
     </div>
   </div>
 </div>

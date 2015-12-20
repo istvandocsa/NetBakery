@@ -17,16 +17,12 @@
             {{item.name}}
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li ng-repeat="state in item.subStates" >
+            <li ng-repeat="state in item.subStates">
               <a ui-sref="{{item.state}}.{{state.state}}">{{state.name}}</a>
             </li>
           </ul>
         </li>
-        <li>
-          <a>Termék management</a>
-        </li>
       </ul>
-
     </li>
 
   </ul>
