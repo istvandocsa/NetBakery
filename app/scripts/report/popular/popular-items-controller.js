@@ -20,9 +20,9 @@
 
       orders.$loaded().then( function(orders) {
 
-        var map = new Array();
-        vm.labels =  new Array();
-        vm.data =  new Array();
+        var map = [];
+        vm.labels =  [];
+        vm.data =  [];
 
         angular.forEach(orders, function(order) {
 
@@ -37,12 +37,7 @@
 
               var position = getPosition(map, productId);
 
-              var object = map.pop(position);
-
-              object.productId = productId;
-              object.quantity += quantity;
-
-              map.push(object);
+              map[position].quantity += quantity;
 
             } else {
               var object = new Object();
@@ -56,7 +51,7 @@
 
         map.forEach( function( value ) {
 
-          getName(value.productId).$loaded().then( function(product) {
+          getProductById(value.productId).$loaded().then( function(product) {
             vm.labels.push(product.name);
             vm.data.push( value.quantity );
           });
@@ -77,7 +72,7 @@
       return result;
     }
 
-    function getName(id) {
+    function getProductById(id) {
       return productService.getProductById(id);
     }
 
@@ -87,7 +82,6 @@
 
       map.forEach( function( value ) {
         if( value.productId === key ) {
-          console.log("havekey " + key);
           result = true;
         }
       });
