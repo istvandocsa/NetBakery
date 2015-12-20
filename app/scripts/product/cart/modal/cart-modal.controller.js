@@ -41,8 +41,10 @@
     function checkout() {
       var msg;
       getIngredients();
+
       getStock().then(function () {
-        if (hasEnoughIngredients()) {
+        hasEnoughIngredients()
+     /*   if (hasEnoughIngredients()) {
           var amount;
           angular.forEach(ingredients, function (ingredient) {
             amount = ingredient.quantity;
@@ -67,7 +69,7 @@
         } else {
           msg = 'Sikertelen vásárlás!';
         }
-        modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: msg});
+        modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: msg});*/
       });
     }
 
@@ -146,8 +148,6 @@
       var stockItem;
       var allowToOrder = true;
       var result = getStockSum();
-      console.log(result);
-      console.log(ingredients);
       angular.forEach(ingredients, function (ingredient) {
         stockItem = $filter('filter')(result, function (item) {
           return item.ingredientId === ingredient.ingredientId;
