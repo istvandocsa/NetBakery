@@ -8,10 +8,10 @@
     .module('app')
     .directive('allow', allow);
 
-  allow.$inject = ['authenticator'];
+  allow.$inject = ['authenticator', '$log'];
 
   /* @ngInject */
-  function allow(authenticator) {
+  function allow(authenticator, $log) {
     var directive = {
       restrict: 'A',
       priority: 100000,
@@ -36,8 +36,8 @@
           angular.forEach(element.children(), function (elm) {
             try {
               elm.remove();
-            }
-            catch (ignore) {
+            } catch (error) {
+              $log.error('Error happened during element removal.', error);
             }
           });
         }
