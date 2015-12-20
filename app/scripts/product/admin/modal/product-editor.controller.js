@@ -9,10 +9,8 @@
     .controller('ProductEditorController', ProductEditorController);
 
   /* @ngInject */
-  function ProductEditorController($uibModalInstance, items, firebaseService, $rootScope, $filter) {
+  function ProductEditorController($uibModalInstance, items, firebaseService, $rootScope) {
     var vm = this;
-    /* vm.selectedIngredient;
-     vm.amount;*/
 
     activate();
 
@@ -26,6 +24,9 @@
       vm.productIngredients = getProductIngredients();
       $rootScope.$on('remove.ingredient', removeItem);
       vm.add = add;
+      vm.update = update;
+      vm.save = save;
+      vm.isNew = items.isNew;
     }
 
     function getProductIngredients() {
@@ -63,6 +64,24 @@
         name: name,
         ingredientId: vm.selectedIngredient,
         quantity: vm.selectedIngredientAmount
+      });
+    }
+
+    function update() {
+      firebaseService.getObject('/products/' + vm.product.$id).$loaded().then(function (product) {
+        product.name = vm.product.name;
+        product.price = vm.product.price;
+        product.url = vm.product.url;
+        product.$save();
+        $uibModalInstance.close();
+      });
+    }
+
+    function save(){
+      firebaseService.getArray('/products').$loaded().then(function (products) {
+        var product = {ingredients: [], name: vm.product.name, price: vm.product.price, url: vm.product.url};
+        products.$add(product);
+        $uibModalInstance.close();
       });
     }
   }

@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductsController', ProductsController);
 
-  ProductsController.$inject = ['productService'];
+  ProductsController.$inject = ['productService', 'modalService'];
 
   /* @ngInject */
-  function ProductsController(productService) {
+  function ProductsController(productService, modalService) {
     var vm = this;
 
     activate();
@@ -20,6 +20,11 @@
 
     function activate() {
       vm.products = productService.getProducts();
+      vm.addNew = addNew;
+    }
+
+    function addNew(){
+      modalService.show("scripts/product/admin/modal/product-editor.template.html", "ProductEditorController", "md", {product: {}, isNew: true});
     }
   }
 

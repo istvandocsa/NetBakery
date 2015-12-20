@@ -1,4 +1,11 @@
 <div id="products">
+  <div class="row" data-allow access="ADMIN">
+    <div class="text-right" style="margin-bottom:12px">
+      <button class="btn btn-primary" ng-click="vm.addNew()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
   <div class="row">
     <div ng-repeat="product in vm.products" class="col-md-4">
       <product object="product"></product>

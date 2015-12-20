@@ -29,7 +29,7 @@
     }
 
     function editOnClick() {
-      modalService.show("scripts/product/admin/modal/product-editor.template.html", "ProductEditorController", "md", {product: product});
+      modalService.show("scripts/product/admin/modal/product-editor.template.html", "ProductEditorController", "md", {product: product, isNew: false});
     }
 
   }
