@@ -67,6 +67,13 @@ angular
               templateUrl: 'scripts/report/popular/popular-item-template.html',
               controller: 'PopularItemsController',
               controllerAs: 'vm'
+            },
+            {
+              name: 'neverUsedIngredients',
+              url: '/neverUsedIngredients',
+              templateUrl: 'scripts/report/never-used/never-used-ingredients-template.html',
+              controller: 'NeverUsedIngredientsController',
+              controllerAs: 'vm'
             }
           ]
         }],
@@ -86,18 +93,18 @@ angular
   $rootScope.$on("$stateChangeStart", handleSecurityCheck);
 
   function handleSecurityCheck(event, state) {
-    if(!isAuthorized()){
+    if (!isAuthorized()) {
       event.preventDefault();
       $state.go("home");
     }
 
-    function isAuthorized(){
+    function isAuthorized() {
       var requiredRole = getRequiredRole();
       var loggedInUser = authenticator.currentUser();
 
       var result = true;
 
-      if(requiredRole && !(loggedInUser && loggedInUser.role === requiredRole)){
+      if (requiredRole && !(loggedInUser && loggedInUser.role === requiredRole)) {
         result = false;
       }
       return result;

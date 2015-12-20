@@ -1,0 +1,21 @@
+<h2 class="text-center">Nem használt alapanyagok</h2>
+
+<div ng-show="vm.hasItems !== undefined && !vm.hasItems" ng-cloak class="alert alert-success" role="alert">
+  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+  Gratulálok, nincs használatlan alapanyagod!
+</div>
+
+<table ng-show="vm.hasItems" class="table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Alapanyag neve</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="ingredient in vm.neverUsedIngredientsList track by $index">
+    <th scope="row">{{$index + 1}}</th>
+    <td>{{ingredient.name}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -48,7 +48,8 @@
           state: 'admin.report',
           subStates: [
             {state : 'popularItems' , name : 'Népszerű termékek'},
-            {state : 'popularIngredients', name : 'Népszerű alapanyagok' }
+            {state : 'popularIngredients', name : 'Népszerű alapanyagok' },
+            {state : 'neverUsedIngredients', name : 'Nem használt alapanyagok' }
           ]
         }
       ];
