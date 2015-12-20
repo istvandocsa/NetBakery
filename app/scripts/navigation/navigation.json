@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Kezdőoldal",
+    "state": "home",
+    "simpleType": true
+  },
+  {
+    "name": "Belépés",
+    "state": "credential",
+    "simpleType": true
+  },
+  {
+    "name": "Raktár",
+    "state": "stockManager.stock",
+    "simpleType": true
+  },
+  {
+    "name": "Kimutatás készítése",
+    "simpleType": false,
+    "state": "admin.report",
+    "subStates": [
+      {
+        "state" : "popularItems",
+        "name" : "Népszerű termékek"
+      },
+      {
+        "state" : "popularIngredients",
+        "name" : "Népszerű alapanyagok"
+      }
+    ]
+  }
+]

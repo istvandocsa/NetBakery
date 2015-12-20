@@ -12,11 +12,12 @@
    * # MainCtrl
    * Controller of the Navbar on the top
    */
-  NavigationController.$inject = ['$location', '$log', 'firebaseService'];
+  NavigationController.$inject = ['$location', '$log', '$http', '$filter', '$rootScope', 'authorizer'];
 
   /* @ngInject */
-  function NavigationController($stateProvider, $log, firebaseService) {
+  function NavigationController($stateProvider, $log, $http, $filter, $rootScope, authorizer) {
     var vm = this;
+    var menuItems = [];
 
     activate();
 
@@ -26,33 +27,23 @@
       vm.brand = 'NetBakery';
       vm.activeState = getActiveState;
 
-      vm.menuItems = [
-        {
-          name: 'Kezdőoldal',
-          state: 'home',
-          simpleType: true
-        },
-        {
-          name: 'Belépés',
-          state: 'credential',
-          simpleType: true
-        },
-        {
-          name: 'Raktár',
-          state: 'stock',
-          simpleType: true
-        },
-        {
-          name: 'Kimutatás készítése',
-          simpleType: false,
-          state: 'admin.report',
-          subStates: [
-            {state : 'popularItems' , name : 'Népszerű termékek'},
-            {state : 'popularIngredients', name : 'Népszerű alapanyagok' },
-            {state : 'neverUsedIngredients', name : 'Nem használt alapanyagok' }
-          ]
-        }
-      ];
+      $http({
+        method: 'GET',
+        url: '/scripts/navigation/navigation.json'
+      }).then(function success(response){
+        menuItems = response.data;
+        $log.info("Got menu items ", menuItems);
+        updateMenuItems();
+      });
+
+      $rootScope.$on("credential.login.success", updateMenuItems);
+      $rootScope.$on("credential.logout", updateMenuItems);
+    }
+
+    function updateMenuItems(){
+      vm.menuItems = $filter('filter')(menuItems, function(menuItem){
+        return authorizer.isAuthorized(menuItem.state);
+      });
     }
 
     function getActiveState(){

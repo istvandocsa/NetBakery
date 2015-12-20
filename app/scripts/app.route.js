@@ -8,7 +8,6 @@ angular
 
     $urlRouterProvider
       .when('/credential', '/credential/login')
-      .when('/stockManager', '/stockManager/stock')
       .otherwise('/');
 
     stateHelperProvider
@@ -18,11 +17,21 @@ angular
         templateUrl: 'scripts/home/home.template.html'
       })
       .state({
-        name: 'stock',
-        url: '/stockManager/stock',
-        templateUrl: 'scripts/ingredient/stock/stock-view.template.html',
-        controller: 'StockController',
-        controllerAs: 'vm'
+        name: 'stockManager',
+        url: '/stockManager',
+        template: '<ui-view></ui-view>',
+        children: [
+          {
+            name: 'stock',
+            url: '/stock',
+            templateUrl: 'scripts/ingredient/stock/stock-view.template.html',
+            controller: 'StockController',
+            controllerAs: 'vm'
+          }
+        ],
+        data: {
+          requiredRole: 'STOCK'
+        }
       })
       .state({
         name: 'credential',
@@ -43,7 +52,10 @@ angular
             controller: 'LoginController',
             controllerAs: 'vm'
           }
-        ]
+        ],
+        data: {
+          requiredRole: 'GUEST'
+        }
       })
       .state({
         name: 'admin',
@@ -89,33 +101,13 @@ angular
         controllerAs: 'vm'
       });
 
-  }).run(function ($rootScope, $log, $state, $urlRouter, authenticator) {
+  }).run(function ($rootScope, $log, $state, authorizer) {
   $rootScope.$on("$stateChangeStart", handleSecurityCheck);
 
   function handleSecurityCheck(event, state) {
-    if (!isAuthorized()) {
+    if(!authorizer.isAuthorized(state)){
       event.preventDefault();
       $state.go("home");
-    }
-
-    function isAuthorized() {
-      var requiredRole = getRequiredRole();
-      var loggedInUser = authenticator.currentUser();
-
-      var result = true;
-
-      if (requiredRole && !(loggedInUser && loggedInUser.role === requiredRole)) {
-        result = false;
-      }
-      return result;
-    }
-
-    function getRequiredRole() {
-      if (state.data) {
-        return state.data.requiredRole;
-      } else {
-        return undefined;
-      }
     }
 
   }
