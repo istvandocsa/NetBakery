@@ -41,6 +41,7 @@
     }
 
     function updateMenuItems(){
+      vm.isUser = authorizer.is("USER");
       vm.menuItems = $filter('filter')(menuItems, function(menuItem){
         return authorizer.isAuthorized(menuItem.state);
       });

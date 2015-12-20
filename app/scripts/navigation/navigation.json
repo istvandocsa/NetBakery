@@ -26,6 +26,10 @@
       {
         "state" : "popularIngredients",
         "name" : "Népszerű alapanyagok"
+      },
+      {
+        "state": "neverUsedIngredients",
+        "name": "Nem használt alapanyagok"
       }
     ]
   }

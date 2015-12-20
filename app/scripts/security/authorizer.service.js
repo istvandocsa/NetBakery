@@ -13,11 +13,22 @@
   /* @ngInject */
   function authorizer(authenticator, $state, $log) {
     var service = {
-      isAuthorized: isAuthorized
+      isAuthorized: isAuthorized,
+      is: is
     };
     return service;
 
     ////////////////
+
+    function is(role){
+      var userRole = "GUEST";
+      var currentUser = authenticator.currentUser();
+      if(currentUser){
+        userRole = currentUser.role;
+      }
+
+      return role === userRole;
+    }
 
     function isAuthorized(stateOrName){
       $log.info("Checking authorization for given state. ", stateOrName);
