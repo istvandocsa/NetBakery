@@ -37,7 +37,7 @@
 
     function handleRegisterSuccess(){
       $log.info("Register success!!");
-      authenticator.authenticate({email: vm.registerForm.email, password: vm.registerForm.password}).success(function(){
+      authenticator.authenticate({email: vm.registerForm.email, password: vm.registerForm.password}).then(function(){
         loadOverlay.off();
         $state.go('home');
       });

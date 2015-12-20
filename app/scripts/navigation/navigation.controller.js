@@ -45,7 +45,7 @@
         {
           name: 'Kimutatás készítése',
           simpleType: false,
-          state: 'report',
+          state: 'admin.report',
           subStates: [
             {state : 'popularItems' , name : 'Népszerű termékek'},
             {state : 'popularIngredients', name : 'Népszerű alapanyagok' }

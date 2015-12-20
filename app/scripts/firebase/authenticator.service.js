@@ -31,8 +31,11 @@
         password: credential.password
       }).then(function(authData){
         $log.info("Successfully logged in as " + authData.uid);
-        currentUser = {uid: authData.uid, email: credential.email};
-        $rootScope.$emit('credential.login.success', currentUser);
+        firebaseService.getObject("/users/" + authData.uid + "/role").$loaded().then(function(role){
+          currentUser = {uid: authData.uid, email: credential.email, role: role.$value};
+          $log.info("Setting currently logged in used ", currentUser);
+          $rootScope.$emit('credential.login.success', currentUser);
+        });
       }).catch(function(error){
         $log.info("Failed to log in!");
         $rootScope.$emit('credential.login.error', error);

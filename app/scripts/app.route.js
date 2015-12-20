@@ -46,25 +46,33 @@ angular
         ]
       })
       .state({
-        name: 'report',
-        url: '/report',
+        name: 'admin',
+        url: '/admin',
         templateUrl: 'scripts/report/report.template.html',
-        children: [
-          {
-            name: 'popularIngredients',
-            url: '/popularIngredients',
-            templateUrl: 'scripts/report/ingredients/popular-ingredients-template.html',
-            controller: 'PopularIngredientsController',
-            controllerAs: 'vm'
-          },
-          {
-            name: 'popularItems',
-            url: '/popularItems',
-            templateUrl: 'scripts/report/popular/popular-item-template.html',
-            controller: 'PopularItemsController',
-            controllerAs: 'vm'
-          }
-        ]
+        children: [{
+          name: 'report',
+          url: '/report',
+          templateUrl: 'scripts/report/report.template.html',
+          children: [
+            {
+              name: 'popularIngredients',
+              url: '/popularIngredients',
+              templateUrl: 'scripts/report/ingredients/popular-ingredients-template.html',
+              controller: 'PopularIngredientsController',
+              controllerAs: 'vm'
+            },
+            {
+              name: 'popularItems',
+              url: '/popularItems',
+              templateUrl: 'scripts/report/popular/popular-item-template.html',
+              controller: 'PopularItemsController',
+              controllerAs: 'vm'
+            }
+          ]
+        }],
+        data: {
+          requiredRole: 'ADMIN'
+        }
       })
       .state({
         name: 'price-list',
@@ -74,4 +82,34 @@ angular
         controllerAs: 'vm'
       });
 
-  });
+  }).run(function ($rootScope, $log, $state, $urlRouter, authenticator) {
+  $rootScope.$on("$stateChangeStart", handleSecurityCheck);
+
+  function handleSecurityCheck(event, state) {
+    if(!isAuthorized()){
+      event.preventDefault();
+      $state.go("home");
+    }
+
+    function isAuthorized(){
+      var requiredRole = getRequiredRole();
+      var loggedInUser = authenticator.currentUser();
+
+      var result = true;
+
+      if(requiredRole && !(loggedInUser && loggedInUser.role === requiredRole)){
+        result = false;
+      }
+      return result;
+    }
+
+    function getRequiredRole() {
+      if (state.data) {
+        return state.data.requiredRole;
+      } else {
+        return undefined;
+      }
+    }
+
+  }
+});
