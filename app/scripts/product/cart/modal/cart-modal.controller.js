@@ -44,7 +44,7 @@
 
       getStock().then(function () {
         hasEnoughIngredients()
-     /*   if (hasEnoughIngredients()) {
+        if (hasEnoughIngredients()) {
           var amount;
           angular.forEach(ingredients, function (ingredient) {
             amount = ingredient.quantity;
@@ -69,7 +69,7 @@
         } else {
           msg = 'Sikertelen vásárlás!';
         }
-        modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: msg});*/
+        modalService.show('scripts/product/cart/modal/notification.template.html', 'CartNotificationController', 'sm', {message: msg});
       });
     }
 
