@@ -27,6 +27,7 @@
     function getProductById(id) {
       return firebaseService.getObject("products/" + id)
     }
+
   }
 
 })();

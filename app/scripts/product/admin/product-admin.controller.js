@@ -8,12 +8,12 @@
     .module('app')
     .controller('ProductAdminController', ProductAdminController);
 
-  ProductAdminController.$inject = ['productService'];
+  ProductAdminController.$inject = ['modalService', 'productService'];
 
   /* @ngInject */
-  function ProductAdminController(productService) {
+  function ProductAdminController(modalService, productService) {
     var vm = this;
-
+    var product;
     activate();
 
     ////////////////
@@ -21,15 +21,15 @@
     function activate() {
       vm.delete = deleteOnClick;
       vm.edit = editOnClick;
+      product = productService.getProductById(vm.product.$id);
     }
 
-    function deleteOnClick(){
-      var product = productService.getProductById(vm.product.$id);
-      product.$remove();
+    function deleteOnClick() {
+      modalService.show("scripts/product/admin/modal/popup.template.html", "PopupController", "sm", {product: product});
     }
 
-    function editOnClick(){
-      console.log('edit')
+    function editOnClick() {
+      modalService.show("scripts/product/admin/modal/product-editor.template.html", "ProductEditorController", "md", {product: product});
     }
 
   }

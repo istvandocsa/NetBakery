@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="modal-header">
+  <h4 class="modal-title">Törlés!</h4>
+</div>
+<div class="modal-body">
+  Biztosan törölni kívánja az alábbi terméket?
 
-</body>
-</html>
+  <h4 class="text-center"><b>{{ vm.product }}</b></h4>
+
+</div>
+<div class="modal-footer">
+  <div class="col-md-6 text-left">
+    <button class="btn btn-primary" type="button" ng-click="vm.cancel()">Mégsem</button>
+  </div>
+  <div class="col-md-6 text-right">
+    <button class="btn btn-danger" type="button" ng-click="vm.delete()">Törlés</button>
+  </div>
+</div>

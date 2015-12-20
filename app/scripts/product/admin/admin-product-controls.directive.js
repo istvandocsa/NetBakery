@@ -15,7 +15,7 @@
     var directive = {
       bindToController: true,
       controller: 'ProductAdminController',
-      templateUrl: 'scripts/product/admin-product-controls.template.html',
+      templateUrl: 'scripts/product/admin/admin-product-controls.template.html',
       controllerAs: 'vm',
       restrict: 'E',
       scope: {
