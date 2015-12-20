@@ -47,7 +47,8 @@
           simpleType: false,
           state: 'report',
           subStates: [
-            {state : 'popularItems' , name : 'Népszerű termékek'}
+            {state : 'popularItems' , name : 'Népszerű termékek'},
+            {state : 'popularIngredients', name : 'Népszerű alapanyagok' }
           ]
         }
       ];

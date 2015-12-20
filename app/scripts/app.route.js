@@ -51,6 +51,13 @@ angular
         templateUrl: 'scripts/report/report.template.html',
         children: [
           {
+            name: 'popularIngredients',
+            url: '/popularIngredients',
+            templateUrl: 'scripts/report/ingredients/popular-ingredients-template.html',
+            controller: 'PopularIngredientsController',
+            controllerAs: 'vm'
+          },
+          {
             name: 'popularItems',
             url: '/popularItems',
             templateUrl: 'scripts/report/popular/popular-item-template.html',
