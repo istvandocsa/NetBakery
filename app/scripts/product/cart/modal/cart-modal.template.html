@@ -35,14 +35,14 @@
     <div class="col-md-4 text-center" style="padding-top: 14px;">
       <strong>Átvevőhely</strong>
       <select class="form-control">
-        <option>ngOption FTW!!!</option>
+        <option ng-repeat="item in vm.pickUps" value="{{item.city}}">{{item.city}}</option>
       </select>
     </div>
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-6">
           <div class="input-group" style="padding-top: 34px;">
-            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.deliveryDate"
+            <input type="datetime" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.deliveryDate"
                    is-open="vm.isCalendarOpened" ng-required="true" show-button-bar="false"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="vm.openCalendar()"><i
