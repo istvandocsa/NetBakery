@@ -18,6 +18,7 @@
     var service = {
       getArray: getArray,
       getObject: getObject,
+      saveObject: saveObject,
       getReference: getReference,
       updateObject: updateObject,
       updateArray: updateArray
@@ -52,6 +53,12 @@
       var currentReference = firebaseReference.child(url);
       $log.info('Updating object for path: ' + currentReference.toString());
       currentReference.set(array);
+    }
+
+    function saveObject(url, obj){
+      var currentReference = firebaseReference.child(url);
+      $log.info('Saving object for path: ' + currentReference.toString());
+      currentReference.push(obj);
     }
 
   }

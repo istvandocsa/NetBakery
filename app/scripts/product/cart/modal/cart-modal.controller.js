@@ -8,10 +8,10 @@
     .module('app')
     .controller('CartModalController', CartModalController);
 
-  CartModalController.$inject = ['$uibModalInstance', 'cartService', 'uibDatepickerConfig', '$log', 'modalService', '$rootScope', 'firebaseService', '$filter'];
+  CartModalController.$inject = ['$uibModalInstance', 'cartService', 'uibDatepickerConfig', '$log', 'modalService', '$rootScope', 'firebaseService', '$filter', 'authenticator'];
 
   /* @ngInject */
-  function CartModalController($uibModalInstance, cartService, uibDatepickerConfig, $log, modalService, $rootScope, firebaseService, $filter) {
+  function CartModalController($uibModalInstance, cartService, uibDatepickerConfig, $log, modalService, $rootScope, firebaseService, $filter, authenticator) {
     var vm = this;
     var date = new Date();
     var ingredients;
@@ -29,7 +29,7 @@
       vm.removeOne = removeOneItem;
       vm.addOne = addOneItem;
       vm.remove = removeItem;
-      vm.pickUps = getPickUps;
+      vm.pickUps = getPickUps();
       vm.checkout = checkout;
       vm.getTotal = totalPrice;
       vm.deliveryDate = date;
@@ -64,6 +64,7 @@
             });
           });
           msg = 'Sikeres vásárlás!';
+          saveOrder();
           $log.info('OMG he is going for it!!!! For real real, not just for play play.');
         } else {
           msg = 'Sikertelen vásárlás!';
@@ -84,6 +85,14 @@
 
     }
 
+    function saveOrder(){
+      var products = [];
+      angular.forEach(vm.products, function(prod){
+        products.push({productId: prod.id, quantity: prod.amount});
+      });
+      var order = {deliveryDate: vm.deliveryDate.toISOString(), products: products, timestamp: new Date().toISOString(), userId: authenticator.currentUser().uid};
+      firebaseService.saveObject('/orders', order);
+    }
     function removeOneItem(product) {
       cartService.removeOne(product);
     }
