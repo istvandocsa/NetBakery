@@ -6,11 +6,11 @@
 
     <div class="text-right">Ár: {{vm.object.price}} Ft</div>
     <div data-allow access="USER">
-      <user-product-controls ng-show="vm.hover"></user-product-controls>
+      <user-product-controls></user-product-controls>
     </div>
 
     <div data-allow access="ADMIN">
-      <admin-product-controls product="vm.object" ng-show="vm.hover"></admin-product-controls>
+      <admin-product-controls product="vm.object"></admin-product-controls>
     </div>
   </div>
 </div>
