@@ -24,6 +24,8 @@
     }
 
     function clickOnAdd() {
+      console.log('itt');
+      console.log(vm.product);
       if (vm.amountToAdd > 0) {
         var order = {id: vm.object.$id, name: vm.object.name, price: vm.object.price, amount: vm.amountToAdd, ingredients: vm.object.ingredients};
         cartService.add(order);
