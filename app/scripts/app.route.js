@@ -67,7 +67,14 @@ angular
               templateUrl: 'scripts/report/popular/popular-item-template.html',
               controller: 'PopularItemsController',
               controllerAs: 'vm'
-            }
+            },
+          {
+            name: 'neverUsedIngredients',
+            url: '/neverUsedIngredients',
+            templateUrl: 'scripts/report/never-used/never-used-ingredients-template.html',
+            controller: 'NeverUsedIngredientsController',
+            controllerAs: 'vm'
+          }
           ]
         }],
         data: {
