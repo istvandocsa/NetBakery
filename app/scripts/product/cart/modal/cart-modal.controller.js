@@ -16,7 +16,6 @@
     var date = new Date();
     var ingredients;
     var stock;
-    var allowToOrder;
 
     activate();
 
@@ -43,8 +42,7 @@
       var msg;
       getIngredients();
       getStock().then(function () {
-        hasEnoughIngredients();
-        if (allowToOrder) {
+        if (hasEnoughIngredients()) {
           var amount;
           angular.forEach(ingredients, function (ingredient) {
             amount = ingredient.quantity;
@@ -85,14 +83,21 @@
 
     }
 
-    function saveOrder(){
+    function saveOrder() {
       var products = [];
-      angular.forEach(vm.products, function(prod){
+      angular.forEach(vm.products, function (prod) {
         products.push({productId: prod.id, quantity: prod.amount});
       });
-      var order = {deliveryDate: vm.deliveryDate.toISOString(), products: products, timestamp: new Date().toISOString(), userId: authenticator.currentUser().uid};
+      var order = {
+        deliveryDate: vm.deliveryDate.toISOString(),
+        products: products,
+        timestamp: new Date().toISOString(),
+        userId: authenticator.currentUser().uid
+      };
+      $log.info('Saving order.', order);
       firebaseService.saveObject('/orders', order);
     }
+
     function removeOneItem(product) {
       cartService.removeOne(product);
     }
@@ -139,8 +144,10 @@
 
     function hasEnoughIngredients() {
       var stockItem;
-      allowToOrder = true;
+      var allowToOrder = true;
       var result = getStockSum();
+      console.log(result);
+      console.log(ingredients);
       angular.forEach(ingredients, function (ingredient) {
         stockItem = $filter('filter')(result, function (item) {
           return item.ingredientId === ingredient.ingredientId;
@@ -151,13 +158,14 @@
           return allowToOrder;
         }
       });
+      return allowToOrder;
     }
 
     function getIngredients() {
       ingredients = [];
       var ingredient;
-
-      angular.forEach(vm.products, function (product) {
+      var array = angular.copy(vm.products);
+      angular.forEach(array, function (product) {
         angular.forEach(product.ingredients, function (item) {
           ingredient = $filter('filter')(ingredients, function (ing) {
             return ing.ingredientId === item.ingredientId;
