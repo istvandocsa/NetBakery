@@ -62,6 +62,8 @@
               if (!existsInMap(ingredient, neverUsedIngredientsList)) {
                 neverUsedIngredientsList.push(ingredient);
               }
+            } else {
+              neverUsedIngredientsList.pop(ingredient);
             }
 
           });
