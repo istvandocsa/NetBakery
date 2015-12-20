@@ -111,4 +111,6 @@ angular
     }
 
   }
+}).run(function(authenticator){
+  authenticator.currentUser();
 });

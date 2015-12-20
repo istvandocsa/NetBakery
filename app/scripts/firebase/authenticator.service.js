@@ -15,15 +15,23 @@
     var firebaseAuth = $firebaseAuth(firebaseService.getReference());
 
     var currentUser;
+    var loadingUser = false;
 
     var service = {
       authenticate: authenticate,
       createUser: createUser,
-      currentUser: getCurrentUser
+      currentUser: getCurrentUser,
+      logout: logout
     };
     return service;
 
     ////////////////
+
+    function logout(){
+      firebaseAuth.$unauth();
+      currentUser = undefined;
+      $rootScope.$emit("credential.logout");
+    }
 
     function authenticate(credential){
       return firebaseAuth.$authWithPassword({
@@ -43,6 +51,18 @@
     }
 
     function getCurrentUser(){
+      if(angular.isUndefined(currentUser)){
+        $log.info("currentUser is undefined.");
+        var auth = firebaseAuth.$getAuth();
+        if(!loadingUser && auth){
+          loadingUser = true;
+          $log.info("Authentication exitst ", auth);
+          firebaseService.getObject("/users/" + auth.uid).$loaded().then(function(user){
+            currentUser = {uid: auth.uid, email: user.email, role: user.role};
+            $rootScope.$emit('credential.login.success', currentUser);
+          });
+        }
+      }
       return currentUser;
     }
 
