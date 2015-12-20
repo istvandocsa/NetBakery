@@ -19,6 +19,7 @@
     ////////////////
 
     function activate() {
+      console.log("cica");
       vm.currentDate = new Date();
 
       vm.openStockOrder = openStockOrder;
