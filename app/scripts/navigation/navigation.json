@@ -32,5 +32,15 @@
         "name": "Nem használt alapanyagok"
       }
     ]
+  },
+  {
+    "name": "Árlap",
+    "state": "admin.priceList",
+    "simpleType": true
+  },
+  {
+    "name": "Új alapanyag hozzáadás",
+    "state": "admin.addIngredient",
+    "simpleType": true
   }
 ]
