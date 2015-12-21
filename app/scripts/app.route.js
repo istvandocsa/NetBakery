@@ -88,29 +88,36 @@ angular
               controllerAs: 'vm'
             }
           ]
-        }],
+        },
+          {
+            name: 'priceList',
+            url: '/priceList',
+            templateUrl: 'scripts/product/price/price-list.template.html',
+            controller: 'PriceListController',
+            controllerAs: 'vm'
+          },
+          {
+            name: 'addIngredient',
+            url: '/addIngredient',
+            templateUrl: 'scripts/ingredient/ingredient.template.html',
+            controller: 'IngredientController',
+            controllerAs: 'vm'
+          }],
         data: {
           requiredRole: 'ADMIN'
         }
-      })
-      .state({
-        name: 'price-list',
-        url: '/admin/price-list',
-        templateUrl: 'scripts/product/price/price-list.template.html',
-        controller: 'PriceListController',
-        controllerAs: 'vm'
       });
 
   }).run(function ($rootScope, $log, $state, authorizer) {
   $rootScope.$on("$stateChangeStart", handleSecurityCheck);
 
   function handleSecurityCheck(event, state) {
-    if(!authorizer.isAuthorized(state)){
+    if (!authorizer.isAuthorized(state)) {
       event.preventDefault();
       $state.go("home");
     }
 
   }
-}).run(function(authenticator){
+}).run(function (authenticator) {
   authenticator.currentUser();
 });
