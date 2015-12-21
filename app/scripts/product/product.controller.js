@@ -25,7 +25,9 @@
       $rootScope.$watch(function(){
         return authenticator.currentUser();
       },function(oldValue, newValue){
-        vm.role = newValue.role;
+        if(newValue){
+          vm.role = newValue.role;
+        }
       });
     }
 
