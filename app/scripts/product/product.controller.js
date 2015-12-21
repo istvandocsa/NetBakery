@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductController', ProductController);
 
-  ProductController.$inject = ['cartService'];
+  ProductController.$inject = ['cartService', '$rootScope', 'authenticator'];
 
   /* @ngInject */
-  function ProductController(cartService) {
+  function ProductController(cartService, $rootScope, authenticator) {
     var vm = this;
 
     activate();
@@ -21,6 +21,12 @@
     function activate() {
       vm.amountToAdd = 0;
       vm.clickOnAdd = clickOnAdd;
+
+      $rootScope.$watch(function(){
+        return authenticator.currentUser();
+      },function(oldValue, newValue){
+        vm.role = newValue.role;
+      });
     }
 
     function clickOnAdd() {

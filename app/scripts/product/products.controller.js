@@ -8,10 +8,10 @@
     .module('app')
     .controller('ProductsController', ProductsController);
 
-  ProductsController.$inject = ['productService', 'modalService'];
+  ProductsController.$inject = ['productService', 'modalService', 'authenticator', '$rootScope'];
 
   /* @ngInject */
-  function ProductsController(productService, modalService) {
+  function ProductsController(productService, modalService, authenticator, $rootScope) {
     var vm = this;
 
     activate();
@@ -21,6 +21,10 @@
     function activate() {
       vm.products = productService.getProducts();
       vm.addNew = addNew;
+
+      $rootScope.$on("credential.login.success", function(event, user){
+        vm.role = user.role;
+      });
     }
 
     function addNew(){

@@ -1,5 +1,5 @@
 <div id="products">
-  <div class="row" data-allow access="ADMIN">
+  <div class="row" ng-show="vm.role === 'ADMIN'">
     <div class="text-right" style="margin-bottom:12px">
       <button class="btn btn-primary" ng-click="vm.addNew()">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
