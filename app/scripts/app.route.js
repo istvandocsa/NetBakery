@@ -86,23 +86,23 @@ angular
               templateUrl: 'scripts/report/never-used/never-used-ingredients-template.html',
               controller: 'NeverUsedIngredientsController',
               controllerAs: 'vm'
-            },
-            {
-              name: 'priceList',
-              url: '/priceList',
-              templateUrl: 'scripts/product/price/price-list.template.html',
-              controller: 'PriceListController',
-              controllerAs: 'vm'
-            },
-            {
-              name: 'addIngredient',
-              url: '/addIngredient',
-              templateUrl: 'scripts/ingredient/ingredient.template.html',
-              controller: 'IngredientController',
-              controllerAs: 'vm'
             }
           ]
-        }],
+        },
+          {
+            name: 'priceList',
+            url: '/priceList',
+            templateUrl: 'scripts/product/price/price-list.template.html',
+            controller: 'PriceListController',
+            controllerAs: 'vm'
+          },
+          {
+            name: 'addIngredient',
+            url: '/addIngredient',
+            templateUrl: 'scripts/ingredient/ingredient.template.html',
+            controller: 'IngredientController',
+            controllerAs: 'vm'
+          }],
         data: {
           requiredRole: 'ADMIN'
         }
@@ -112,12 +112,12 @@ angular
   $rootScope.$on("$stateChangeStart", handleSecurityCheck);
 
   function handleSecurityCheck(event, state) {
-    if(!authorizer.isAuthorized(state)){
+    if (!authorizer.isAuthorized(state)) {
       event.preventDefault();
       $state.go("home");
     }
 
   }
-}).run(function(authenticator){
+}).run(function (authenticator) {
   authenticator.currentUser();
 });
